@@ -1,0 +1,45 @@
+---
+#################################
+#################################
+## Super Linter GitHub Actions ##
+#################################
+#################################
+name: Lint Code Base
+
+#
+# Documentation:
+# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+#
+
+#############################
+# Start the job on all push #
+#############################
+on:
+  pull_request:
+    branches: [master, main]
+
+###############
+# Set the Job #
+###############
+jobs:
+  build:
+    name: Build, test, lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+      
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+
+      - name: Installing dependencies
+        run: npm i --ignore-scripts
+
+      - name: Lint code base
+        run: npm run lint:ts && npm run lint:scss

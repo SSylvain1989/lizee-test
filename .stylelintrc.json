@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "next",
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss"
+  ],
+  "plugins": [
+    "stylelint-scss"
+  ]
+}
