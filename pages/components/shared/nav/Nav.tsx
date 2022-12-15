@@ -53,7 +53,7 @@ export default function Nav() {
             </div>
 
             <div className={styles["navigation-right"]}>
-              <div className={styles["navigation-account"]}>
+              <div>
                 <Button
                   startIcon={<AccountCircleIcon />}
                   sx={{
@@ -64,7 +64,7 @@ export default function Nav() {
                   My account
                 </Button>
               </div>
-              <div className={styles["navigation-help"]}>
+              <div>
                 <Button
                   sx={{
                     color: "black",
