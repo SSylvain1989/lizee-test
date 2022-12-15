@@ -1,0 +1,38 @@
+.header {
+  top: 0;
+  left: 0;
+  color: #6f677b;
+  right: 0;
+  z-index: 1100;
+  position: fixed;
+  transform: translateY(0);
+  box-shadow: 0px 0px 15px rgb(46 46 46 / 10%);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    top 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.hidden {
+  transform: translateY(-180px);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.nav {
+  height: 60px;
+  display: flex;
+  transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .logo {
+    gap: 16px;
+    display: flex;
+  }
+
+  .navigation-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

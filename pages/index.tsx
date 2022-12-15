@@ -1,7 +1,10 @@
+import Container from "@mui/material/Container"
+
 export default function Home() {
   return (
     <div>
-      Landing page
+      <Container maxWidth="xl">
+      </Container>
     </div>
   )
 }
