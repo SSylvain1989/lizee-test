@@ -1,10 +1,9 @@
-import Container from "@mui/material/Container"
+import Hero from "./components/shared/hero/Hero"
 
 export default function Home() {
   return (
     <div>
-      <Container maxWidth="xl">
-      </Container>
+      <Hero />
     </div>
   )
 }

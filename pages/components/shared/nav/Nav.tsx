@@ -36,7 +36,7 @@ export default function Nav() {
       <CssBaseline />
 
       <header className={`${styles.header} ${!show && styles.hidden}`}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{backgroundColor: "white"}}>
           <nav className={styles.nav}>
             <div className={styles.logo}>
               <Link href="/">
@@ -54,11 +54,11 @@ export default function Nav() {
 
             <div className={styles["navigation-right"]}>
               <div>
-                <Button
+                <Button 
                   startIcon={<AccountCircleIcon />}
                   sx={{
                     color: "black",
-                    textTransform: "Capitalize",
+                    textTransform: "none",
                   }}
                 >
                   My account
@@ -68,7 +68,7 @@ export default function Nav() {
                 <Button
                   sx={{
                     color: "black",
-                    textTransform: "Capitalize",
+                    textTransform: "none",
                   }}
                   startIcon={<HelpOutlineOutlinedIcon />}
                 >
