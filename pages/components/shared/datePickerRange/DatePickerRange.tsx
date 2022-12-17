@@ -4,16 +4,16 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { DatePicker } from "@mui/x-date-pickers"
 import TextField from "@mui/material/TextField"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import Box from "@mui/material/Box"
 
 export default function HomeHeader() {
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(new Date()))
-console.log(startDate)
   const onChangeStartDate = (newValue: Dayjs | null) => {
     setStartDate(newValue)
   }
-
-  const [endDate, setEndDate] = useState<Dayjs | null>(dayjs(new Date()).add(2, 'day'))
-
+  const [endDate, setEndDate] = useState<Dayjs | null>(
+    dayjs(new Date()).add(2, "day")
+  )
   const onChangeEndDate = (newValue: Dayjs | null) => {
     setEndDate(newValue)
   }
@@ -22,57 +22,79 @@ console.log(startDate)
   const [openEndDate, setOpenEndDate] = useState(false)
 
   useEffect(() => {
-    if(startDate){
-      setEndDate(startDate.add(2, 'day'))
+    if (startDate) {
+      setEndDate(startDate.add(2, "day"))
     }
   }, [startDate])
 
+  const color = "blue"
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-        InputAdornmentProps={{ style: { display: "none" } }}
-        open={openStartDate}
-        onOpen={() => setOpenStartDate(true)}
-        onClose={() => setOpenStartDate(false)}
-        label="Start of rental"
-        value={startDate}
-        inputFormat="DD/MM/YYYY"
-        minDate={dayjs(new Date())} 
-        onChange={onChangeStartDate}
-        renderInput={(params) => {
-          return (
-            <TextField
-              {...params}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onClick={() => setOpenStartDate(true)}
-            />
-          )
-        }}
-      />
-      <DatePicker
-        InputAdornmentProps={{ style: { display: "none" } }}
-        open={openEndDate}
-        onOpen={() => setOpenEndDate(true)}
-        onClose={() => setOpenEndDate(false)}
-        label="End of rental"
-        minDate={startDate?.add(2, 'day')}
-        value={endDate}
-        inputFormat="DD/MM/YYYY"
-        onChange={onChangeEndDate}
-        renderInput={(params) => {
-          return (
-            <TextField
-              {...params}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onClick={() => setOpenEndDate(true)}
-            />
-          )
-        }}
-      />
+      <Box display="flex" alignItems="center" flexDirection="row" width="250px" borderRadius={50}>
+        <Box width="175px" borderRadius={4}>
+          <DatePicker
+            InputAdornmentProps={{ style: { display: "none" } }}
+            open={openStartDate}
+            onOpen={() => setOpenStartDate(true)}
+            onClose={() => setOpenStartDate(false)}
+            value={startDate}
+            inputFormat="DD/MM/YYYY"
+            minDate={dayjs(new Date())}
+            onChange={onChangeStartDate}
+            renderInput={(params) => {
+              return (
+                <TextField
+                  variant="standard"
+                  sx={{
+                    svg: { color },
+                    input: { color },
+                    label: { color },
+                    backgroundColor: "white",
+                    borderRadius: "5px 0 0 5px ",
+                    padding : "4px 0 0 10px"
+                  }}
+                  {...params}
+                  onClick={() => setOpenStartDate(true)}
+                />
+              )
+            }}
+          />
+        </Box>
+        <Box width="220px" borderRadius={4}>
+          <DatePicker
+            InputAdornmentProps={{ position: 'start'}}
+            open={openEndDate}
+            onOpen={() => setOpenEndDate(true)}
+            onClose={() => setOpenEndDate(false)}
+            minDate={startDate?.add(2, "day")}
+            value={endDate}
+            inputFormat="DD/MM/YYYY"
+            onChange={onChangeEndDate}
+            renderInput={(params) => {
+              return (
+                <TextField
+                  variant="standard"
+                  sx={{
+                    svg: { color },
+                    input: { color },
+                    label: { color },
+                    backgroundColor: "white",
+                    borderRadius: "0 5px 5px 0",
+                    padding : "4px 5px 0 0"
+                  }}
+                  {...params}
+                  InputLabelProps={{
+                    shrink: true,
+                    color: "primary",
+                  }}
+                  onClick={() => setOpenEndDate(true)}
+                />
+              )
+            }}
+          />
+        </Box>
+      </Box>
     </LocalizationProvider>
   )
 }
