@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Container from "@mui/material/Container"
 import styles from "./Hero.module.scss"
+import DatePickerRange from "../datePickerRange/DatePickerRange"
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
           <h1>Lizee Reuse platform</h1>
           <strong>Rent or buy our products on demand.</strong>
           <p>Delivered when you need it.</p>
+          <DatePickerRange />
         </div>
       </Container>
     </div>
