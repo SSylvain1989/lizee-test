@@ -36,7 +36,7 @@ export default function Nav() {
       <CssBaseline />
 
       <header className={`${styles.header} ${!show && styles.hidden}`}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" >
           <nav className={styles.nav}>
             <div className={styles.logo}>
               <Link href="/">
@@ -59,9 +59,13 @@ export default function Nav() {
                   sx={{
                     color: "black",
                     textTransform: "none",
+                    minWidth: { 
+                      xs: "20px",
+                      sm: "64px",
+                    }
                   }}
                 >
-                  My account
+                  <p>My account</p>
                 </Button>
               </div>
               <div>
@@ -69,10 +73,14 @@ export default function Nav() {
                   sx={{
                     color: "black",
                     textTransform: "none",
+                    minWidth: { 
+                      xs: "20px",
+                      sm: "64px",
+                    }
                   }}
                   startIcon={<HelpOutlineOutlinedIcon />}
                 >
-                  Help page
+                  <p>Help page</p>
                 </Button>
               </div>
             </div>

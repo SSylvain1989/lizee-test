@@ -1,8 +1,7 @@
 import Image from "next/image"
-import Container from "@mui/material/Container"
 import DatePickerRange from "../datePickerRange/DatePickerRange"
 import CustomButton from "../CustomButton/CustomButton"
-import Box from "@mui/material/Box"
+import { Box, Container, Stack } from "@mui/material"
 import styles from "./Hero.module.scss"
 
 export default function Home() {
@@ -28,25 +27,29 @@ export default function Home() {
           <CustomButton color={"primary"} label="See our pack" darkUi={true} />
         </Box>
 
-        <Box display="flex" gap={2} marginTop={2}>
+        <Stack
+          direction={{ xs: "row", sm: "row" }}
+          spacing={{ xs: 1, sm: 2}}
+          mt={2}
+        >
           <Box
             display="flex"
             alignItems="center"
             flexDirection="column"
-            style={{
+            sx={{
               border: "1px solid white",
               color: "white",
               borderRadius: "4px",
               padding: "8px",
-              width: "90px",
+              width: "93px",
               height: "95px",
             }}
           >
             <Image
               src="/images/Icon_shipping.svg"
               layout="fixed"
-              width={61}
-              height={32}
+              width={91}
+              height={48}
               alt="Truck delivery with a clock on the back of the truck"
             />
             <p className={styles["small-info"]}>Delivery on time</p>
@@ -56,12 +59,12 @@ export default function Home() {
             display="flex"
             alignItems="center"
             flexDirection="column"
-            style={{
+            sx={{
               border: "1px solid white",
               color: "white",
               borderRadius: "4px",
               padding: "8px",
-              width: "90px",
+              width: "93px",
               height: "95px",
             }}
           >
@@ -79,12 +82,12 @@ export default function Home() {
             display="flex"
             alignItems="center"
             flexDirection="column"
-            style={{
+            sx={{
               border: "1px solid white",
               color: "white",
               borderRadius: "4px",
               padding: "8px",
-              width: "90px",
+              width: "93px",
               height: "95px",
             }}
           >
@@ -97,7 +100,7 @@ export default function Home() {
             />
             <p className={styles["small-info"]}>Easy returns</p>
           </Box>
-        </Box>
+        </Stack>
       </Container>
     </div>
   )

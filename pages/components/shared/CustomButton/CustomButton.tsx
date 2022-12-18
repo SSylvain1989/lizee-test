@@ -8,11 +8,13 @@ export interface CustomizedButtonsProps {
   color: "primary" | "secondary"
   label: string
   darkUi?: boolean
+  type?: "button" | "submit" | "reset" | undefined
 }
 export default function CustomizedButtons({
   color,
   label,
   darkUi = false,
+  type,
 }: CustomizedButtonsProps) {
   const ColorButton = colorIs()
 
@@ -62,5 +64,5 @@ export default function CustomizedButtons({
         }))
     }
   }
-  return <ColorButton>{label}</ColorButton>
+  return <ColorButton type={type ?? "button"}>{label}</ColorButton>
 }

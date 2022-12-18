@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import Box from "@mui/material/Box"
 import CustomButton from "../CustomButton/CustomButton"
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 export default function HomeHeader() {
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(new Date()))
@@ -31,91 +32,104 @@ export default function HomeHeader() {
   const color = "blue"
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box
-        display="flex"
-        alignItems="center"
-        flexDirection="row"
-        width="320px"
-        borderRadius={50}
-        justifyContent="space-between"
-        marginTop={3}
-      >
+    <form>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Box
           display="flex"
           alignItems="center"
           flexDirection="row"
-          width="250px"
-          borderRadius={50}
+          width="300px"
+          justifyContent="space-between"
+          marginTop={3}
         >
-          <Box width="110px" borderRadius={4}>
-            <DatePicker
-              InputAdornmentProps={{ style: { display: "none" } }}
-              open={openStartDate}
-              onOpen={() => setOpenStartDate(true)}
-              onClose={() => setOpenStartDate(false)}
-              value={startDate}
-              inputFormat="DD/MM/YYYY"
-              minDate={dayjs(new Date())}
-              onChange={onChangeStartDate}
-              renderInput={(params) => {
-                return (
-                  <TextField
-                    variant="standard"
-                    sx={{
-                      svg: { color },
-                      input: { color },
-                      label: { color },
-                      backgroundColor: "white",
-                      borderRadius: "5px 0 0 5px ",
-                      padding: "4px 0 0 10px",
-                    }}
-                    {...params}
-                    onClick={() => setOpenStartDate(true)}
-                  />
-                )
+          <Box
+            display="flex"
+            alignItems="center"
+            flexDirection="row"
+            width="220px"
+            border="1px solid white"
+            borderRadius={2}
+          >
+            <Box width="110px" borderRadius={4}>
+              <DatePicker
+                InputAdornmentProps={{ style: { display: "none" } }}
+                open={openStartDate}
+                onOpen={() => setOpenStartDate(true)}
+                onClose={() => setOpenStartDate(false)}
+                value={startDate}
+                inputFormat="DD/MM/YYYY"
+                minDate={dayjs(new Date())}
+                onChange={onChangeStartDate}
+                renderInput={(params) => {
+                  return (
+                    <TextField
+                      variant="standard"
+                      sx={{
+                        svg: { color },
+                        input: { color },
+                        label: { color },
+                        backgroundColor: "white",
+                        borderRadius: "5px 0 0 5px ",
+                        padding: "4px 0 1px 10px",
+                      }}
+                      {...params}
+                      onClick={() => setOpenStartDate(true)}
+                    />
+                  )
+                }}
+              />
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "white",
+                height: "37px",
+                padding: "6px 0 1px 0",
               }}
-            />
+            >
+              <ArrowRightIcon
+              sx={{color: "#870E4F"}}
+              />
+            </Box>
+            <Box width="110px" borderRadius={4}>
+              <DatePicker
+                InputAdornmentProps={{ style: { display: "none" } }}
+                open={openEndDate}
+                onOpen={() => setOpenEndDate(true)}
+                onClose={() => setOpenEndDate(false)}
+                minDate={startDate?.add(2, "day")}
+                value={endDate}
+                inputFormat="DD/MM/YYYY"
+                onChange={onChangeEndDate}
+                renderInput={(params) => {
+                  return (
+                    <TextField
+                      variant="standard"
+                      sx={{
+                        svg: { color },
+                        input: { color },
+                        label: { color },
+                        backgroundColor: "white",
+                        borderRadius: "0 5px 5px 0",
+                        padding: "4px 11px 1px 3px",
+                      }}
+                      {...params}
+                      InputLabelProps={{
+                        shrink: true,
+                        color: "primary",
+                      }}
+                      onClick={() => setOpenEndDate(true)}
+                    />
+                  )
+                }}
+              />
+            </Box>
           </Box>
-          <Box width="130px" borderRadius={4}>
-            <DatePicker
-              InputAdornmentProps={{ position: "start" }}
-              open={openEndDate}
-              onOpen={() => setOpenEndDate(true)}
-              onClose={() => setOpenEndDate(false)}
-              minDate={startDate?.add(2, "day")}
-              value={endDate}
-              inputFormat="DD/MM/YYYY"
-              onChange={onChangeEndDate}
-              renderInput={(params) => {
-                return (
-                  <TextField
-                    variant="standard"
-                    sx={{
-                      svg: { color },
-                      input: { color },
-                      label: { color },
-                      backgroundColor: "white",
-                      borderRadius: "0 5px 5px 0",
-                      padding: "4px 5px 0 0",
-                    }}
-                    {...params}
-                    InputLabelProps={{
-                      shrink: true,
-                      color: "primary",
-                    }}
-                    onClick={() => setOpenEndDate(true)}
-                  />
-                )
-              }}
-            />
-          </Box>
-        </Box>
 
-        <Box p={0}>
-          <CustomButton color={"primary"} label="Start"/>
+          <Box p={0}>
+            <CustomButton color={"primary"} label="Start" type="button" />
+          </Box>
         </Box>
-      </Box>
-    </LocalizationProvider>
+      </LocalizationProvider>
+    </form>
   )
 }
