@@ -64,5 +64,9 @@ export default function CustomizedButtons({
         }))
     }
   }
-  return <ColorButton type={type ?? "button"}>{label}</ColorButton>
+  return (
+    <ColorButton fullWidth type={type ?? "button"}>
+      {label}
+    </ColorButton>
+  )
 }

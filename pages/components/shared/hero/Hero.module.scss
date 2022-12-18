@@ -3,7 +3,8 @@
 .container {
   position: absolute;
   overflow: hidden;
-  height: calc(100% - 60px);
+  max-height: 650px;
+  min-height: 650px;
   width: 100vw;
   z-index: -1;
 
@@ -15,18 +16,10 @@
 .content-wrapper {
   width: 100%;
   padding: 60px 0 0;
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 60px);
+  min-height: calc(100% + 60px);
 
   h1 {
     @include h1;
-
-    color: white;
-  }
-
-  strong {
-    @include text-large-bold;
 
     color: white;
   }
@@ -36,10 +29,11 @@
 
     color: white;
   }
-}
 
-.small-info {
-  @include text-small;
+  .small-info {
+    @include text-small;
 
-  margin: 8px 0 0;
+    margin: 8px 0 0;
+    text-align: center;
+  }
 }
