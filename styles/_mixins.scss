@@ -42,7 +42,7 @@
 @mixin text-small {
   font-weight: 400;
   font-size: 12px;
-  line-height: 21px;
+  line-height: 13px;
   letter-spacing: normal;
 
   @media screen and (max-width: 767px) {
@@ -75,7 +75,7 @@
 @mixin text-small-bold {
   font-weight: 600;
   font-size: 12px;
-  line-height: 21px;
+  line-height: 13px;
   letter-spacing: normal;
 
   @media screen and (max-width: 767px) {
