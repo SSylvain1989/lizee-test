@@ -1,0 +1,39 @@
+@import "../../../../styles/mixins";
+
+.container {
+  position: absolute;
+  overflow: hidden;
+  max-height: 650px;
+  min-height: 650px;
+  width: 100vw;
+  z-index: -1;
+
+  .background {
+    object-fit: cover;
+  }
+}
+
+.content-wrapper {
+  width: 100%;
+  padding: 60px 0 0;
+  min-height: calc(100% + 60px);
+
+  h1 {
+    @include h1;
+
+    color: white;
+  }
+
+  p {
+    @include text-large;
+
+    color: white;
+  }
+
+  .small-info {
+    @include text-small;
+
+    margin: 8px 0 0;
+    text-align: center;
+  }
+}
