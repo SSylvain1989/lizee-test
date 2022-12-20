@@ -2,19 +2,25 @@ import Image from "next/image"
 import { Box, CardActions, IconButton, CardContent, Card } from "@mui/material"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
 import styles from "./PreviewOneProduct.module.scss"
+import Link from "next/link"
 
 interface PreviewOneProductProps {
   name: string
   shortDescription: string
   image: string
+  slug: string
 }
 
 export default function PreviewOneProduct({
   name,
   image,
   shortDescription,
+  slug,
 }: PreviewOneProductProps) {
+  console.log(slug)
   return (
+    <Link href={`shop/${slug}`}>
+    
     <Card
       sx={{
         display: "flex",
@@ -60,5 +66,6 @@ export default function PreviewOneProduct({
         </CardActions>
       </Box>
     </Card>
+    </Link>
   )
 }

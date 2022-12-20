@@ -1,8 +1,8 @@
 export interface Items {
-  items: Item[]
+  items: Items[]
 }
 
-export interface Item {
+export interface Items {
   name: string
   shortDescription: string
   slug: string
@@ -12,3 +12,24 @@ export interface Item {
 export interface ItemImage {
   cachedPath: string
 }
+
+export interface ItemData {
+  name: string;
+  description: string;
+  images: ItemImage[];
+  variants: Record<string,Variants>
+};
+
+export interface ItemSize {
+  name: string;
+  code: string;
+};
+
+export interface Variants {
+  code: string;
+  name: string;
+  price: {
+    current: number;
+    currency: string;
+  };
+};
