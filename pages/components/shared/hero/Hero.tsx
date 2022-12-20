@@ -24,6 +24,7 @@ export default function Home() {
         sx={{
           display: "flex",
           flexDirection: "column",
+          position: "relative"
         }}
       >
         <div className={styles["content-wrapper"]}>

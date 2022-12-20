@@ -6,36 +6,34 @@
 
   @media screen and (max-width: 599px) {
     @include h2;
-
-    text-align: center;
   }
 }
 
 @mixin h2 {
   font-weight: 600;
   font-size: 48px;
-  line-height: 55px;
+  line-height: 60px;
 }
 
 @mixin text-large {
   font-weight: 400;
   font-size: 15px;
-  line-height: 24px;
+  line-height: 20px;
   letter-spacing: normal;
 
   @media screen and (max-width: 599px) {
-    text-align: center;
+    line-height: 18px;
   }
 }
 
 @mixin text-medium {
   font-weight: 400;
   font-size: 14px;
-  line-height: 26px;
+  line-height: 20px;
   letter-spacing: normal;
 
-  @media screen and (max-width: 767px) {
-    text-align: center;
+  @media screen and (max-width: 599px) {
+    line-height: 18px;
   }
 }
 
@@ -44,31 +42,27 @@
   font-size: 12px;
   line-height: 13px;
   letter-spacing: normal;
-
-  @media screen and (max-width: 599px) {
-    text-align: center;
-  }
 }
 
 @mixin text-large-bold {
   font-weight: 600;
   font-size: 15px;
-  line-height: 24px;
+  line-height: 22px;
   letter-spacing: normal;
 
   @media screen and (max-width: 599px) {
-    text-align: center;
+    line-height: 20px;
   }
 }
 
 @mixin text-medium-bold {
   font-weight: 600;
   font-size: 14px;
-  line-height: 26px;
+  line-height: 20px;
   letter-spacing: normal;
 
   @media screen and (max-width: 599px) {
-    text-align: center;
+    line-height: 18px;
   }
 }
 
@@ -77,8 +71,4 @@
   font-size: 12px;
   line-height: 13px;
   letter-spacing: normal;
-
-  @media screen and (max-width: 599px) {
-    text-align: center;
-  }
 }
