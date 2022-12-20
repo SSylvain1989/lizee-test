@@ -6,7 +6,7 @@
   max-height: 650px;
   min-height: 650px;
   width: 100vw;
-  z-index: -1;
+  z-index: 0;
 
   .background {
     object-fit: cover;
@@ -22,12 +22,20 @@
     @include h1;
 
     color: white;
+
+    @media screen and (max-width: 599px) {
+      text-align: center;
+    }
   }
 
   p {
     @include text-large;
 
     color: white;
+
+    @media screen and (max-width: 599px) {
+      text-align: center;
+    }
   }
 
   .small-info {
@@ -35,5 +43,9 @@
 
     margin: 8px 0 0;
     text-align: center;
+
+    @media screen and (max-width: 599px) {
+      text-align: center;
+    }
   }
 }

@@ -2,6 +2,7 @@ import Image from "next/image"
 import DatePickerRange from "../datePickerRange/DatePickerRange"
 import CustomButton from "../CustomButton/CustomButton"
 import { Box, Container, Stack } from "@mui/material"
+import lizeeImage from "../../../../public/images/lizee.jpeg"
 import styles from "./Hero.module.scss"
 
 export default function Home() {
@@ -10,9 +11,12 @@ export default function Home() {
       <div className={styles.container}>
         <Image
           className={styles.background}
-          src="/images/montain.avif"
+          src={lizeeImage}
           layout="fill"
           alt="Three men on bike at the mountain"
+          priority
+          quality={100}
+          placeholder="blur"
         />
       </div>
       <Container
@@ -20,6 +24,7 @@ export default function Home() {
         sx={{
           display: "flex",
           flexDirection: "column",
+          position: "relative"
         }}
       >
         <div className={styles["content-wrapper"]}>
