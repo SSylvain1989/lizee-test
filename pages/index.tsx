@@ -3,7 +3,7 @@ import Hero from "../components/shared/hero/Hero"
 import PreviewAllProducts from "../components/shared/previewAllProducts/PreviewAllProducts"
 
 export default function Home({ items }: Items) {
-  console.log(items)
+
   return (
     <div>
       <Hero />

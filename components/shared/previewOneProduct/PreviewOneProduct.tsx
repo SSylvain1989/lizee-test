@@ -17,7 +17,7 @@ export default function PreviewOneProduct({
   shortDescription,
   slug,
 }: PreviewOneProductProps) {
-  console.log(slug)
+
   return (
     <Link href={`shop/${slug}`}>
     
