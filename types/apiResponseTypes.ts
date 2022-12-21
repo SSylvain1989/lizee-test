@@ -20,13 +20,7 @@ export interface ItemData {
   variants: Record<string,Variants>
 };
 
-export interface ItemSize {
-  name: string;
-  code: string;
-};
-
 export interface Variants {
-  code: string;
   name: string;
   price: {
     current: number;

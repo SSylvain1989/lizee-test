@@ -1,5 +1,5 @@
 import { Grid, Stack, Container } from "@mui/material"
-import { Items } from "../../../utils/apiResponseTypes"
+import { Items } from "../../../types/apiResponseTypes"
 import PreviewOneProduct from "../previewOneProduct/PreviewOneProduct"
 
 interface PreviewAllProductsProps {
@@ -12,11 +12,10 @@ export default function PreviewAllProducts({ items }: PreviewAllProductsProps) {
       <Stack alignItems="center" sx={{ m: "120px 0" }}>
         <Grid
           container
-          justifyContent="center"
-          spacing={{ xs: 1, sm: 1, md: 2, lg: 6 }}
+          spacing={3}
         >
           {items.map((product) => (
-            <Grid item key={product.slug}>
+            <Grid xs={6} md={4} lg={3} item key={product.slug}>
               <PreviewOneProduct
                 image={product.images[0].cachedPath}
                 name={product.name}

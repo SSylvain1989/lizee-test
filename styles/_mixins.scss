@@ -5,7 +5,7 @@
   letter-spacing: -1.9px;
 
   @media screen and (max-width: 599px) {
-    @include h2;
+    @include text-title-large;
   }
 }
 
@@ -13,6 +13,24 @@
   font-weight: 600;
   font-size: 48px;
   line-height: 60px;
+
+  @media screen and (max-width: 599px) {
+    @include text-title-small;
+  }
+}
+
+@mixin text-title-large {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 28px;
+  letter-spacing: normal;
+}
+
+@mixin text-title-small {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: normal;
 }
 
 @mixin text-large {

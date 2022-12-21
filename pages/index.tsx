@@ -1,9 +1,8 @@
-import { Items } from "../utils/apiResponseTypes"
+import { Items } from "../types/apiResponseTypes"
 import Hero from "../components/shared/hero/Hero"
 import PreviewAllProducts from "../components/shared/previewAllProducts/PreviewAllProducts"
 
 export default function Home({ items }: Items) {
-
   return (
     <div>
       <Hero />

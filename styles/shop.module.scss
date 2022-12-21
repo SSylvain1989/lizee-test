@@ -1,0 +1,11 @@
+@import "./mixins";
+
+.title {
+  @include h2;
+
+  margin-top: 0;
+}
+
+.description {
+  @include text-large;
+}

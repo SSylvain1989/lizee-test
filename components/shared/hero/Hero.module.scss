@@ -11,6 +11,11 @@
   .background {
     object-fit: cover;
   }
+
+  @media screen and (max-width: 599px) {
+    max-height: 550px;
+    min-height: 550px;
+  }
 }
 
 .content-wrapper {
