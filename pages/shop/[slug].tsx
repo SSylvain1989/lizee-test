@@ -2,10 +2,11 @@ import { Box, Container, Grid, Button } from "@mui/material"
 import { GetStaticProps } from "next"
 import Image from "next/image"
 import { ParsedUrlQuery } from "querystring"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Items, ItemData, Variants } from "../../types/apiResponseTypes"
-import styles from "../../styles/shop.module.scss"
 import PreviewAllProducts from "../../components/shared/previewAllProducts/PreviewAllProducts"
+import styles from "../../styles/shop.module.scss"
+import { useRouter } from "next/router"
 
 interface ShopProps {
   item: ItemData
@@ -16,12 +17,19 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function Shop({ item, items }: ShopProps) {
+  const router = useRouter();
+const { slug } = router.query
+
   const sizeListAndPricePerProduct = Object.values(item.variants).map(
     (value) => ({
       name: value.name,
       price: value.price,
     })
   )
+  useEffect(() => {
+    setCurrentPrice(sizeListAndPricePerProduct[0].price)
+    setSelectedButton(sizeListAndPricePerProduct[0].name)
+  }, [slug])
 
   const [currentPrice, setCurrentPrice] = useState(
     sizeListAndPricePerProduct[0].price
@@ -136,6 +144,7 @@ export const getStaticProps: GetStaticProps<ShopProps, Params> = async (
     `https://lizee-test-dad-nextjs-admin.lizee.io/shop-api/taxon-products/by-slug/categorie-${categorie}?limit=${limit}&page=${page}`
   )
   const allProducts = await fetchAllProducts.json()
+
 
   return {
     props: { item: productData, items: allProducts.items },
