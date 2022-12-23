@@ -27,6 +27,7 @@ export default function PreviewOneProduct({
           display: "flex",
           flexDirection: "column",
           height: "100%",
+          cursor: "pointer"
         }}
       >
         <Image

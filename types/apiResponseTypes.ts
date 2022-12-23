@@ -22,8 +22,9 @@ export interface ItemData {
 
 export interface Variants {
   name: string;
-  price: {
+  price?: {
     current: number;
     currency: string;
   };
+  purchasePrice?: number;
 };

@@ -16,32 +16,46 @@ interface Params extends ParsedUrlQuery {
   slug: string
 }
 
+interface newVariants {
+  size: string
+  price: number | undefined
+  currency: string | undefined
+}
+
 export default function Shop({ item, items }: ShopProps) {
   const router = useRouter();
 const { slug } = router.query
+console.log(item.variants)
 
   const sizeListAndPricePerProduct = Object.values(item.variants).map(
     (value) => ({
-      name: value.name,
-      price: value.price,
+      size: value.name,
+      price: value?.price?.current ? value.price.current : value.purchasePrice,
+      currency: value?.price?.currency
     })
   )
   useEffect(() => {
     setCurrentPrice(sizeListAndPricePerProduct[0].price)
-    setSelectedButton(sizeListAndPricePerProduct[0].name)
+    setSelectedButton(sizeListAndPricePerProduct[0].size)
+    setCurrentCurrency(sizeListAndPricePerProduct[0].currency)
   }, [slug])
 
   const [currentPrice, setCurrentPrice] = useState(
     sizeListAndPricePerProduct[0].price
   )
 
-  const [selectedButton, setSelectedButton] = useState(
-    sizeListAndPricePerProduct[0].name
+  const [currentCurrency, setCurrentCurrency] = useState(
+    sizeListAndPricePerProduct[0].currency
   )
 
-  const handleOnClick = (item: Variants) => {
+  const [selectedButton, setSelectedButton] = useState(
+    sizeListAndPricePerProduct[0].size
+  )
+
+  const handleOnClick = (item: newVariants) => {
     setCurrentPrice(item.price)
-    setSelectedButton(item.name)
+    setSelectedButton(item.size)
+    setCurrentCurrency(item.currency)
   }
 
   return (
@@ -74,7 +88,7 @@ const { slug } = router.query
                     <Button
                       key={index}
                       variant={
-                        item.name === selectedButton ? "contained" : "outlined"
+                        item.size === selectedButton ? "contained" : "outlined"
                       }
                       sx={{
                         padding: "5px",
@@ -85,13 +99,13 @@ const { slug } = router.query
                       }}
                       onClick={() => handleOnClick(item)}
                     >
-                      {item.name}
+                      {item.size}
                     </Button>
                   ))}
                   {currentPrice && (
                     <p>
-                      Price : {currentPrice.current.toLocaleString("fr-FR")}{" "}
-                      {currentPrice.currency === "EUR" ? "€" : "$"}
+                      Price : {currentPrice.toLocaleString("fr-FR")}{" "}
+                      {currentCurrency === "EUR" ? "€" : "$"}
                     </p>
                   )}
                   <Button variant="contained">ADD TO CART</Button>
