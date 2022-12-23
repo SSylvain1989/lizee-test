@@ -3,7 +3,7 @@ import { GetStaticProps } from "next"
 import Image from "next/image"
 import { ParsedUrlQuery } from "querystring"
 import { useEffect, useState } from "react"
-import { Items, ItemData, Variants } from "../../types/apiResponseTypes"
+import { Items, ItemData } from "../../types/apiResponseTypes"
 import PreviewAllProducts from "../../components/shared/previewAllProducts/PreviewAllProducts"
 import styles from "../../styles/shop.module.scss"
 import { useRouter } from "next/router"
@@ -23,39 +23,27 @@ interface newVariants {
 }
 
 export default function Shop({ item, items }: ShopProps) {
-  const router = useRouter();
-const { slug } = router.query
-console.log(item.variants)
+  const router = useRouter()
+  const { slug } = router.query
 
   const sizeListAndPricePerProduct = Object.values(item.variants).map(
     (value) => ({
       size: value.name,
       price: value?.price?.current ? value.price.current : value.purchasePrice,
-      currency: value?.price?.currency
+      currency: value?.price?.currency,
     })
   )
+
+  const [selectedVariant, setSelectedVariant] = useState(
+    sizeListAndPricePerProduct[0]
+  )
+
   useEffect(() => {
-    setCurrentPrice(sizeListAndPricePerProduct[0].price)
-    setSelectedButton(sizeListAndPricePerProduct[0].size)
-    setCurrentCurrency(sizeListAndPricePerProduct[0].currency)
+    setSelectedVariant(sizeListAndPricePerProduct[0])
   }, [slug])
 
-  const [currentPrice, setCurrentPrice] = useState(
-    sizeListAndPricePerProduct[0].price
-  )
-
-  const [currentCurrency, setCurrentCurrency] = useState(
-    sizeListAndPricePerProduct[0].currency
-  )
-
-  const [selectedButton, setSelectedButton] = useState(
-    sizeListAndPricePerProduct[0].size
-  )
-
-  const handleOnClick = (item: newVariants) => {
-    setCurrentPrice(item.price)
-    setSelectedButton(item.size)
-    setCurrentCurrency(item.currency)
+  const handleOnClick = (variant: newVariants) => {
+    setSelectedVariant(variant)
   }
 
   return (
@@ -84,11 +72,13 @@ console.log(item.variants)
 
               <Box display="flex" flexDirection="column" minHeight="50px">
                 <Box>
-                  {sizeListAndPricePerProduct.map((item, index) => (
+                  {sizeListAndPricePerProduct.map((variant, index) => (
                     <Button
                       key={index}
                       variant={
-                        item.size === selectedButton ? "contained" : "outlined"
+                        variant.size === selectedVariant.size
+                          ? "contained"
+                          : "outlined"
                       }
                       sx={{
                         padding: "5px",
@@ -97,15 +87,15 @@ console.log(item.variants)
                         margin: "5px 5px 5px 0",
                         fontSize: "13px",
                       }}
-                      onClick={() => handleOnClick(item)}
+                      onClick={() => handleOnClick(variant)}
                     >
-                      {item.size}
+                      {variant.size}
                     </Button>
                   ))}
-                  {currentPrice && (
+                  {selectedVariant.price && (
                     <p>
-                      Price : {currentPrice.toLocaleString("fr-FR")}{" "}
-                      {currentCurrency === "EUR" ? "€" : "$"}
+                      Price : {selectedVariant.price.toLocaleString("fr-FR")}{" "}
+                      {selectedVariant.currency === "EUR" ? "€" : "$"}
                     </p>
                   )}
                   <Button variant="contained">ADD TO CART</Button>
@@ -158,7 +148,6 @@ export const getStaticProps: GetStaticProps<ShopProps, Params> = async (
     `https://lizee-test-dad-nextjs-admin.lizee.io/shop-api/taxon-products/by-slug/categorie-${categorie}?limit=${limit}&page=${page}`
   )
   const allProducts = await fetchAllProducts.json()
-
 
   return {
     props: { item: productData, items: allProducts.items },
