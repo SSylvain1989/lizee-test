@@ -18,8 +18,8 @@ interface Params extends ParsedUrlQuery {
 
 interface newVariants {
   size: string
-  price: number | undefined
-  currency: string | undefined
+  price: number
+  currency: string
 }
 
 export default function Shop({ item, items }: ShopProps) {
@@ -29,8 +29,8 @@ export default function Shop({ item, items }: ShopProps) {
   const sizeListAndPricePerProduct = Object.values(item.variants).map(
     (value) => ({
       size: value.name,
-      price: value?.price?.current ? value.price.current : value.purchasePrice,
-      currency: value?.price?.currency,
+      price: value?.price?.current ? value.price.current : (value.purchasePrice ? value.purchasePrice : 0),
+      currency: value?.price?.currency ? value?.price.currency : "EUR",
     })
   )
 
