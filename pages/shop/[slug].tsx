@@ -2,7 +2,7 @@ import { Box, Container, Grid, Button } from "@mui/material"
 import { GetStaticProps } from "next"
 import Image from "next/image"
 import { ParsedUrlQuery } from "querystring"
-import { useEffect, useReducer } from "react"
+import { useEffect, useState } from "react"
 import { Items, ItemData } from "../../types/apiResponseTypes"
 import PreviewAllProducts from "../../components/shared/previewAllProducts/PreviewAllProducts"
 import styles from "../../styles/shop.module.scss"
@@ -26,48 +26,25 @@ export default function Shop({ item, items }: ShopProps) {
   const router = useRouter()
   const { slug } = router.query
 
-  enum ActionType {
-    SetVariant = "SET_VARIANT",
-  }
-
-  interface Action {
-    type: ActionType
-    payload: newVariants
-  }
-
-  const reducer = (state: newVariants, action: Action): newVariants => {
-    switch (action.type) {
-      case ActionType.SetVariant:
-        return action.payload
-      default:
-        return state
-    }
-  }
-
-  const [selectedVariant, dispatch] = useReducer(reducer, {
-    size: "",
-    price: 0,
-    currency: "EUR",
-  })
-
   const sizeListAndPricePerProduct = Object.values(item.variants).map(
     (value) => ({
       size: value.name,
-      price: value?.price?.current
-        ? value.price.current
-        : value.purchasePrice
-        ? value.purchasePrice
-        : 0,
-      currency: value?.price?.currency ? value?.price.currency : "EUR",
+      price: value.price?.current || value.purchasePrice || 0,
+      currency: value?.price?.currency || "EUR",
     })
   )
 
+  const [selectedVariant, setSelectedVariant] = useState(
+    sizeListAndPricePerProduct[0]
+  )
+
   useEffect(() => {
-    dispatch({
-      type: ActionType.SetVariant,
-      payload: sizeListAndPricePerProduct[0],
-    })
-  }, [slug, ActionType.SetVariant])
+    setSelectedVariant(sizeListAndPricePerProduct[0])
+  }, [slug])
+
+  const handleOnClick = (variant: newVariants) => {
+    setSelectedVariant(variant)
+  }
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: "120px" }}>
@@ -90,10 +67,12 @@ export default function Shop({ item, items }: ShopProps) {
             <Box flex="1 1 50%" mb="40px">
               <Box>
                 <h1 className={styles.title}>{item.name}</h1>
+                <p>About this product :</p>
                 <p className={styles.description}>{item.description}</p>
               </Box>
 
               <Box display="flex" flexDirection="column" minHeight="50px">
+                <p>Select your size : </p>
                 <Box>
                   {sizeListAndPricePerProduct.map((variant, index) => (
                     <Button
@@ -110,13 +89,7 @@ export default function Shop({ item, items }: ShopProps) {
                         margin: "5px 5px 5px 0",
                         fontSize: "13px",
                       }}
-                      // onClick={() => handleOnClick(variant)}
-                      onClick={() =>
-                        dispatch({
-                          type: ActionType.SetVariant,
-                          payload: variant,
-                        })
-                      }
+                      onClick={() => handleOnClick(variant)}
                     >
                       {variant.size}
                     </Button>
