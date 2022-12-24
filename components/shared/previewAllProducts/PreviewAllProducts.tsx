@@ -9,7 +9,8 @@ interface PreviewAllProductsProps {
 export default function PreviewAllProducts({ items }: PreviewAllProductsProps) {
   return (
     <Container maxWidth="xl">
-      <Stack alignItems="center" sx={{ m: "120px 0" }}>
+      <Stack sx={{ m: "120px 0" }}>
+        <h2>See all our products :</h2>
         <Grid
           container
           spacing={3}
