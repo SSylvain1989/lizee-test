@@ -1,13 +1,12 @@
-import { Items } from "../utils/apiResponseTypes"
-import Hero from "./components/shared/hero/Hero"
-import PreviewAllProducts from "./components/shared/previewAllProducts/PreviewAllProducts"
+import { Items } from "../types/apiResponseTypes"
+import Hero from "../components/shared/hero/Hero"
+import PreviewAllProducts from "../components/shared/previewAllProducts/PreviewAllProducts"
 
 export default function Home({ items }: Items) {
-  console.log(items)
   return (
     <div>
       <Hero />
-      <PreviewAllProducts items={items}/>
+      <PreviewAllProducts items={items} />
     </div>
   )
 }

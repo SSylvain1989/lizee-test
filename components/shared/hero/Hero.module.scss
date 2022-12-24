@@ -1,4 +1,4 @@
-@import "../../../../styles/mixins";
+@import "../../../styles/mixins";
 
 .container {
   position: absolute;
@@ -10,6 +10,11 @@
 
   .background {
     object-fit: cover;
+  }
+
+  @media screen and (max-width: 599px) {
+    max-height: 550px;
+    min-height: 550px;
   }
 }
 

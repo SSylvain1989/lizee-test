@@ -2,7 +2,7 @@ import Image from "next/image"
 import DatePickerRange from "../datePickerRange/DatePickerRange"
 import CustomButton from "../CustomButton/CustomButton"
 import { Box, Container, Stack } from "@mui/material"
-import lizeeImage from "../../../../public/images/lizee.jpeg"
+import lizeeImage from "../../../public/images/lizee.jpeg"
 import styles from "./Hero.module.scss"
 
 export default function Home() {
