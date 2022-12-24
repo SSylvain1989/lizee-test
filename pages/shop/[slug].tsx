@@ -1,12 +1,13 @@
-import { Box, Container, Grid, Button } from "@mui/material"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 import { GetStaticProps } from "next"
 import Image from "next/image"
+import { Box, Container, Grid, Button } from "@mui/material"
 import { ParsedUrlQuery } from "querystring"
-import { useEffect, useState } from "react"
 import { Items, ItemData } from "../../types/apiResponseTypes"
 import PreviewAllProducts from "../../components/shared/previewAllProducts/PreviewAllProducts"
+import { getAllProducts , getProductBySlug } from "../../api/products"
 import styles from "../../styles/shop.module.scss"
-import { useRouter } from "next/router"
 
 interface ShopProps {
   item: ItemData
@@ -111,15 +112,13 @@ export default function Shop({ item, items }: ShopProps) {
     </Container>
   )
 }
+
 export async function getStaticPaths() {
   const categorie = "t-shirts"
   const limit = 10
   const page = 1
 
-  const fetchAllProducts = await fetch(
-    `https://lizee-test-dad-nextjs-admin.lizee.io/shop-api/taxon-products/by-slug/categorie-${categorie}?limit=${limit}&page=${page}`
-  )
-  const allProducts = await fetchAllProducts.json()
+  const allProducts = await getAllProducts(categorie, limit, page);
 
   const paths = allProducts.items.map((product: Items) => {
     return {
@@ -138,18 +137,11 @@ export const getStaticProps: GetStaticProps<ShopProps, Params> = async (
 ) => {
   const slug = context.params?.slug
 
-  const apiUrl =
-    "https://lizee-test-dad-nextjs-admin.lizee.io/shop-api/products/by-slug/"
-
-  const fetchOneProductBySlug = await fetch(`${apiUrl}${slug}`)
-  const productData = await fetchOneProductBySlug.json()
+  const productData = await getProductBySlug(slug ? slug : "");
   const categorie = "t-shirts"
   const limit = 10
   const page = 1
-  const fetchAllProducts = await fetch(
-    `https://lizee-test-dad-nextjs-admin.lizee.io/shop-api/taxon-products/by-slug/categorie-${categorie}?limit=${limit}&page=${page}`
-  )
-  const allProducts = await fetchAllProducts.json()
+  const allProducts = await getAllProducts(categorie, limit, page);
 
   return {
     props: { item: productData, items: allProducts.items },
