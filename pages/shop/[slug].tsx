@@ -2,7 +2,7 @@ import { Box, Container, Grid, Button } from "@mui/material"
 import { GetStaticProps } from "next"
 import Image from "next/image"
 import { ParsedUrlQuery } from "querystring"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Items, ItemData } from "../../types/apiResponseTypes"
 import PreviewAllProducts from "../../components/shared/previewAllProducts/PreviewAllProducts"
 import styles from "../../styles/shop.module.scss"
@@ -26,6 +26,15 @@ export default function Shop({ item, items }: ShopProps) {
   const router = useRouter()
   const { slug } = router.query
 
+  const handleOnClick = (variant: newVariants) => {
+    setSelectedVariant(variant)
+  }
+
+  const initialSelectedVariant = useRef<newVariants>()
+  const [selectedVariant, setSelectedVariant] = useState<newVariants>(
+    initialSelectedVariant.current || { size: "", price: 0, currency: "EUR" }
+  )
+
   const sizeListAndPricePerProduct = Object.values(item.variants).map(
     (value) => ({
       size: value.name,
@@ -33,18 +42,11 @@ export default function Shop({ item, items }: ShopProps) {
       currency: value?.price?.currency ? value?.price.currency : "EUR",
     })
   )
-
-  const [selectedVariant, setSelectedVariant] = useState(
-    sizeListAndPricePerProduct[0]
-  )
-
   useEffect(() => {
-    setSelectedVariant(sizeListAndPricePerProduct[0])
-  }, [slug])
 
-  const handleOnClick = (variant: newVariants) => {
-    setSelectedVariant(variant)
-  }
+    initialSelectedVariant.current = sizeListAndPricePerProduct[0]
+    setSelectedVariant(initialSelectedVariant.current)
+  }, [slug])
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: "120px" }}>
