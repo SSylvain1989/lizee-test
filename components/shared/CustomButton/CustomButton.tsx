@@ -9,12 +9,14 @@ export interface CustomizedButtonsProps {
   label: string
   darkUi?: boolean
   type?: "button" | "submit" | "reset" | undefined
+  onClick?: () => void
 }
 export default function CustomizedButtons({
   color,
   label,
   darkUi = false,
   type,
+  onClick,
 }: CustomizedButtonsProps) {
   const ColorButton = colorIs()
 
@@ -65,7 +67,7 @@ export default function CustomizedButtons({
     }
   }
   return (
-    <ColorButton fullWidth type={type ?? "button"}>
+    <ColorButton fullWidth type={type ?? "button"} onClick={onClick}>
       {label}
     </ColorButton>
   )
