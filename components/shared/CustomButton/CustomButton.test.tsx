@@ -18,7 +18,7 @@ describe("Button", () => {
       expect(button).not.toHaveStyle("background-color: transparent")
     })
   })
-  it("should have style 'background-color : transparent' if button is darkUi={false} and color='primary'", async () => {
+  it("should have style 'background-color : transparent' if button is darkUi={true} and color='primary'", async () => {
     render(<CustomButton darkUi={true} color="primary" label={""} />)
     const button = getButton()
     await waitFor(() => {
